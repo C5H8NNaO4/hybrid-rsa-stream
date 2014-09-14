@@ -7,6 +7,8 @@ is necessary because encrypting more than `n/8-11` bytes with an asymmetric
 key is considered insecure, so the asymmetric key encrypts a generated key for a
 symmetric block cipher.
 
+[![build status](https://secure.travis-ci.org/substack/hybrid-rsa-stream.png)](http://travis-ci.org/substack/hybrid-rsa-stream)
+
 # data
 
 The data over the wire is:
