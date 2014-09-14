@@ -95,7 +95,8 @@ function makeInput (enc) {
     var encoding = defined(enc, 'binary');
     if (encoding === 'binary') return through();
     return through(function (buf, e, next) {
-        this.push(Buffer(buf.toString('utf8'), encoding));
+        try { this.push(Buffer(buf.toString('utf8'), encoding)) }
+        catch (e) { return this.emit('error', e) }
         next();
     });
 }
