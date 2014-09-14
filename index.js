@@ -23,13 +23,11 @@ exports.encrypt = function (pubkey, opts) {
     ;
     
     var enc = rsa.encrypt(pubkey);
-    enc.write(Buffer.concat([ Buffer([ balgo.length ]), balgo ]));
-    
-    var klen = Buffer(2);
-    klen.writeUInt16BE(key.length, 0);
-    output.write(klen);
     
     enc.pipe(concat(function (body) {
+        var blen = Buffer(2);
+        blen.writeUInt16BE(body.length, 0);
+        
         var blen = Buffer([ body.length ]);
         output.write(Buffer.concat([ blen, body ]));
         
@@ -37,7 +35,8 @@ exports.encrypt = function (pubkey, opts) {
         input.pipe(cipher).pipe(output);
     }));
     
-    enc.end(key);
+    var blen = Buffer([ balgo.length ]);
+    enc.end(Buffer.concat([ blen, balgo, key ]));
     return duplexer(input, output);
 };
 
