@@ -9,15 +9,15 @@ asymmetrically encrypt a key for a symmetric cipher
 The data over the wire is:
 
 ```
-[asymmetric length (2 bytes)]
-[asymmetric rsa ciphertext]
+[asymmetric ciphertext length (UInt16BE, 2 bytes)]
+[asymmetric ciphertext]
 [symmetric ciphertext]
 ```
 
 The cleartext for the asymmetric payload is:
 
 ```
-[symmetric key name length (1 byte)]
+[symmetric key name length (UInt8, 1 byte)]
 [symmetric key name string]
 [symmetric key (remaining bytes)]
 ```
@@ -63,11 +63,21 @@ Return a through stream `enc` that takes cleartext as input and produces
 ciphertext as output encrypted with a public key buffer or string `publicKey` in
 PEM or ssh-style format.
 
+Optionally specify:
+
+* `opts.encoding` - encoding to use for output. Valid encodings: `'base64'`,
+`'hex'`, `'binary'`. Default encoding: `'binary'`.
+
 ## var dec = hybrid.decrypt(privateKey, opts)
 
 Return a through stream `dec` that takes ciphertext as input and produces
 decrypted cleartext as output from the private key string or buffer `privateKey`
 in PEM or ssh-style format.
+
+Optionally specify:
+
+* `opts.encoding` - encoding to use for input. Valid encodings: `'base64'`,
+`'hex'`, `'binary'`. Default encoding: `'binary'`.
 
 # install
 
