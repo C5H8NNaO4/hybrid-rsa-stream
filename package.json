@@ -1,0 +1,36 @@
+{
+  "name": "hybrid-rsa-stream",
+  "version": "1.0.0",
+  "description": "encrypt symmetric keys using asymmetric rsa keys ",
+  "main": "index.js",
+  "dependencies": {
+    "concat-stream": "^1.4.6",
+    "defined": "~0.0.0",
+    "duplexer2": "~0.0.2",
+    "rsa-stream": "^1.0.0",
+    "through2": "^1.1.1"
+  },
+  "devDependencies": {
+    "tape": "^2.13.2"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/substack/hybrid-rsa-stream.git"
+  },
+  "homepage": "https://github.com/substack/hybrid-rsa-stream",
+  "keywords": [
+    "crypto",
+    "asymmetric",
+    "symmetric",
+    "rsa"
+  ],
+  "author": {
+    "name": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net"
+  },
+  "license": "MIT"
+}

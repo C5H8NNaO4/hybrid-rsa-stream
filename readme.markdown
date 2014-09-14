@@ -1,8 +1,11 @@
 # hybrid-rsa-stream
 
-asymmetrically encrypt a key for a symmetric cipher
+encrypt symmetric keys using asymmetric rsa keys 
 
-[hybrid](http://www.cs.rochester.edu/~brown/Crypto/assts/projects/hybrid/hybrid.html)
+This [hybrid approach](http://www.cs.rochester.edu/~brown/Crypto/assts/projects/hybrid/hybrid.html)
+is necessary because encrypting more than `n/8-11` bytes with an asymmetric
+key is considered insecure, so the asymmetric key encrypts a generated key for a
+symmetric block cipher.
 
 # data
 
