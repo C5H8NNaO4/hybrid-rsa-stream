@@ -66,7 +66,15 @@ exports.decrypt = function (privkey, opts) {
         }
         else next();
     }
-    function end () { cipher.end() }
+    function end () {
+        if (!cipher) {
+            var err = new Error('invalid data');
+            err.type = 'INVALID';
+            err.code = 'INVALID';
+            dup.emit('error', err);
+        }
+        else cipher.end()
+    }
     
     function getDecipher (payload, cb) {
         var dec = rsa.decrypt(privkey);
@@ -79,7 +87,8 @@ exports.decrypt = function (privkey, opts) {
         dec.end(payload);
     }
     
-    return duplexer(input, output);
+    var dup = duplexer(input, output);
+    return dup;
 };
 
 function makeInput (enc) {

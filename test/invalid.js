@@ -7,7 +7,7 @@ var privkey = fs.readFileSync(__dirname + '/files/private');
 var pubkey = fs.readFileSync(__dirname + '/files/public');
 
 test('invalid', function (t) {
-    t.plan(2);
+    t.plan(1);
     
     var dec = hybrid.decrypt(privkey, { encoding: 'hex' });
     dec.on('error', function (err) { t.ok(err) });
