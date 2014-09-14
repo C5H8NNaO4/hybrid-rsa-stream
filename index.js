@@ -13,15 +13,7 @@ exports.encrypt = function (pubkey, opts) {
     var balgo = Buffer(algo);
     
     var input = through();
-    var encoding = defined(opts.encoding, 'binary');
-    var output = encoding === 'binary'
-        ? through()
-        : through(function (buf, e, next) {
-            this.push(buf.toString(encoding));
-            next();
-        })
-    ;
-    
+    var output = makeOutput(opts.encoding);
     var enc = rsa.encrypt(pubkey);
     
     enc.pipe(concat(function (body) {
@@ -43,4 +35,17 @@ exports.encrypt = function (pubkey, opts) {
 exports.decrypt = function (privkey, opts) {
     if (!opts) opts = {};
     var dec = rsa.decrypt(privkey, opts);
+    
+    var input = through();
+    var output = through();
+    return duplexer(input, output);
 };
+
+function makeOutput (enc) {
+    var encoding = defined(enc, 'binary');
+    if (encoding === 'binary') return through();
+    return through(function (buf, e, next) {
+        this.push(buf.toString(encoding));
+        next();
+    });
+}
