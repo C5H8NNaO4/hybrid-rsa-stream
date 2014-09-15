@@ -50,10 +50,10 @@ key:
 ``` js
 var hybrid = require('hybrid-rsa-stream');
 var fs = require('fs');
-var pubkey = fs.readFileSync(__dirname + '/files/public');
+var privkey = fs.readFileSync(__dirname + '/files/private');
 
-var enc = hybrid.encrypt(pubkey, { encoding: 'base64' });
-process.stdin.pipe(enc).pipe(process.stdout);
+var denc = hybrid.dencrypt(privkey, { encoding: 'base64' });
+process.stdin.pipe(denc).pipe(process.stdout);
 ```
 
 # methods
