@@ -1,6 +1,6 @@
 {
   "name": "hybrid-rsa-stream",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "encrypt symmetric keys using asymmetric rsa keys ",
   "main": "index.js",
   "dependencies": {
