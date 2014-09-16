@@ -72,6 +72,7 @@ Optionally specify:
 
 * `opts.encoding` - encoding to use for output. Valid encodings: `'base64'`,
 `'hex'`, `'binary'`. Default encoding: `'binary'`.
+* `opts.algorithm` - symmetric cipher to use, default: `'AES-256-CBC'`
 
 ## var dec = hybrid.decrypt(privateKey, opts)
 
